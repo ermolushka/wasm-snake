@@ -37,6 +37,7 @@ pub struct Universe {
     height: u32,
     cells: Vec<Cell>,
     snake: Snake,
+    target: u32
 }
 
 #[wasm_bindgen]
@@ -100,8 +101,8 @@ impl Snake {
 impl Universe {
     pub fn new() -> Universe {
         utils::set_panic_hook();
-        let width = 128;
-        let height = 128;
+        let width = 32;
+        let height = 32;
 
         let mut initial_setup: bool = false;
 
@@ -131,6 +132,7 @@ impl Universe {
             height,
             cells,
             snake,
+            target: 1
         }
     }
 
@@ -171,10 +173,15 @@ impl Universe {
 
         let idx = self.get_index(snake_next_move.0, snake_next_move.1);
 
-        next[idx] = Cell::Filled; // add head to the snake
-        let removed_cell = self.snake.body.remove(0); // remove tail
-        next[removed_cell as usize] = Cell::Empty; // mark tail as empty
-        self.snake.body.push(idx as u32);
+        if idx as u32 == self.target {
+            next[idx] = Cell::Filled; // add head to the snake
+            self.snake.body.push(idx as u32);
+        } else {
+            next[idx] = Cell::Filled; // add head to the snake
+            let removed_cell = self.snake.body.remove(0); // remove tail
+            next[removed_cell as usize] = Cell::Empty; // mark tail as empty
+            self.snake.body.push(idx as u32);
+        }
 
         self.cells = next;
     }
