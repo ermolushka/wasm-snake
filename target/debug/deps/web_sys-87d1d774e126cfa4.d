@@ -1,0 +1,11 @@
+/home/abc/Documents/wasm-snake/target/debug/deps/libweb_sys-87d1d774e126cfa4.rmeta: /home/abc/.cargo/registry/src/index.crates.io-6f17d22bba15001f/web-sys-0.3.76/src/lib.rs /home/abc/.cargo/registry/src/index.crates.io-6f17d22bba15001f/web-sys-0.3.76/src/features/mod.rs /home/abc/.cargo/registry/src/index.crates.io-6f17d22bba15001f/web-sys-0.3.76/src/features/gen_Event.rs /home/abc/.cargo/registry/src/index.crates.io-6f17d22bba15001f/web-sys-0.3.76/src/features/gen_EventTarget.rs /home/abc/.cargo/registry/src/index.crates.io-6f17d22bba15001f/web-sys-0.3.76/src/features/gen_MessageEvent.rs /home/abc/.cargo/registry/src/index.crates.io-6f17d22bba15001f/web-sys-0.3.76/src/features/gen_Worker.rs /home/abc/.cargo/registry/src/index.crates.io-6f17d22bba15001f/web-sys-0.3.76/src/features/gen_console.rs
+
+/home/abc/Documents/wasm-snake/target/debug/deps/web_sys-87d1d774e126cfa4.d: /home/abc/.cargo/registry/src/index.crates.io-6f17d22bba15001f/web-sys-0.3.76/src/lib.rs /home/abc/.cargo/registry/src/index.crates.io-6f17d22bba15001f/web-sys-0.3.76/src/features/mod.rs /home/abc/.cargo/registry/src/index.crates.io-6f17d22bba15001f/web-sys-0.3.76/src/features/gen_Event.rs /home/abc/.cargo/registry/src/index.crates.io-6f17d22bba15001f/web-sys-0.3.76/src/features/gen_EventTarget.rs /home/abc/.cargo/registry/src/index.crates.io-6f17d22bba15001f/web-sys-0.3.76/src/features/gen_MessageEvent.rs /home/abc/.cargo/registry/src/index.crates.io-6f17d22bba15001f/web-sys-0.3.76/src/features/gen_Worker.rs /home/abc/.cargo/registry/src/index.crates.io-6f17d22bba15001f/web-sys-0.3.76/src/features/gen_console.rs
+
+/home/abc/.cargo/registry/src/index.crates.io-6f17d22bba15001f/web-sys-0.3.76/src/lib.rs:
+/home/abc/.cargo/registry/src/index.crates.io-6f17d22bba15001f/web-sys-0.3.76/src/features/mod.rs:
+/home/abc/.cargo/registry/src/index.crates.io-6f17d22bba15001f/web-sys-0.3.76/src/features/gen_Event.rs:
+/home/abc/.cargo/registry/src/index.crates.io-6f17d22bba15001f/web-sys-0.3.76/src/features/gen_EventTarget.rs:
+/home/abc/.cargo/registry/src/index.crates.io-6f17d22bba15001f/web-sys-0.3.76/src/features/gen_MessageEvent.rs:
+/home/abc/.cargo/registry/src/index.crates.io-6f17d22bba15001f/web-sys-0.3.76/src/features/gen_Worker.rs:
+/home/abc/.cargo/registry/src/index.crates.io-6f17d22bba15001f/web-sys-0.3.76/src/features/gen_console.rs:
