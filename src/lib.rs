@@ -65,23 +65,23 @@ impl Snake {
                 let (row, col) = self.get_row_col(*val as usize, width);
                 match self.direction {
                     Direction::Down => {
-                        let x = row;
-                        let y = col - 1;
-                        (x, y)
-                    }
-                    Direction::Up => {
-                        let x = row;
-                        let y = col + 1;
-                        (x, y)
-                    }
-                    Direction::Left => {
                         let x = row - 1;
                         let y = col;
                         (x, y)
                     }
-                    Direction::Right => {
+                    Direction::Up => {
                         let x = row + 1;
                         let y = col;
+                        (x, y)
+                    }
+                    Direction::Left => {
+                        let x = row;
+                        let y = col - 1;
+                        (x, y)
+                    }
+                    Direction::Right => {
+                        let x = row;
+                        let y = col + 1;
                         (x, y)
                     }
                 }
@@ -111,6 +111,7 @@ impl Universe {
                     Cell::Empty
                 } else {
                     if js_sys::Math::random() < 0.5 {
+                        initial_setup = true;
                         Cell::Filled
                     } else {
                         Cell::Empty
@@ -120,7 +121,7 @@ impl Universe {
             .collect();
 
         let snake = Snake {
-            direction: Direction::Up,
+            direction: Direction::Right,
             body: vec![0],
             alive: true,
         };
@@ -149,6 +150,9 @@ impl Universe {
     }
 
     pub fn tick(&mut self) {
+
+        log!("    snake status {:?}", self.snake.alive);
+
         if !self.snake.alive {
             return;
         }
@@ -168,8 +172,8 @@ impl Universe {
         let idx = self.get_index(snake_next_move.0, snake_next_move.1);
 
         next[idx] = Cell::Filled; // add head to the snake
-        let remvoed_cell = self.snake.body.remove(0); // remove tail
-        next[remvoed_cell as usize] = Cell::Empty; // mark tail as empty
+        let removed_cell = self.snake.body.remove(0); // remove tail
+        next[removed_cell as usize] = Cell::Empty; // mark tail as empty
         self.snake.body.push(idx as u32);
 
         self.cells = next;
