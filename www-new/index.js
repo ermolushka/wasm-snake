@@ -1,8 +1,8 @@
-import { Universe, Cell } from "wasm-snake";
+import { Universe, Cell, Direction } from "wasm-snake";
 import { memory } from "wasm-snake/wasm_snake_bg";
 
 
-const CELL_SIZE = 5; // px
+const CELL_SIZE = 8; // px
 const GRID_COLOR = "#CCCCCC";
 const DEAD_COLOR = "#FFFFFF";
 const ALIVE_COLOR = "#000000";
@@ -23,59 +23,67 @@ const ctx = canvas.getContext('2d');
 let animationId = null;
 
 
+let currentDirection = Direction.Right; // Default direction
+
+document.addEventListener('keydown', event => {
+  if(['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(event.key)) {
+    event.preventDefault();
+  }
+
+  const prevDirection = currentDirection;
+  
+  switch (event.key) {
+    case 'ArrowUp':
+      if (currentDirection !== Direction.Down && prevDirection !== Direction.Down) {
+        currentDirection = Direction.Up;
+        universe.change_snake_direction(Direction.Up);
+      }
+      break;
+    case 'ArrowRight':
+      if (currentDirection !== Direction.Left && prevDirection !== Direction.Left) {
+        currentDirection = Direction.Right;
+        universe.change_snake_direction(Direction.Right);
+      }
+      break;
+    case 'ArrowDown':
+      if (currentDirection !== Direction.Up && prevDirection !== Direction.Up) {
+        currentDirection = Direction.Down;
+        universe.change_snake_direction(Direction.Down);
+      }
+      break;
+    case 'ArrowLeft':
+      if (currentDirection !== Direction.Right && prevDirection !== Direction.Right) {
+        currentDirection = Direction.Left;
+        universe.change_snake_direction(Direction.Left);
+      }
+      break;
+  }
+});
+
 const renderLoop = () => {
-  //debugger;
   drawGrid();
   drawCells();
 
   universe.tick();
-
-  animationId = setTimeout(renderLoop, 1000);
+  if (universe.snake_is_alive()) {
+    animationId = setTimeout(renderLoop, 500);
+  } else {
+    gameStatus.textContent = "game over"
+    pause();
+  }
 };
 
-const isPaused = () => {
-  return animationId === null;
-};
-
-const playPauseButton = document.getElementById("play-pause");
+const gameStatus = document.getElementById("game-status");
 
 const play = () => {
-  playPauseButton.textContent = "⏸";
+  gameStatus.textContent = "playing"
   renderLoop();
 };
 
 const pause = () => {
-  playPauseButton.textContent = "▶";
   cancelAnimationFrame(animationId);
   animationId = null;
 };
-
-playPauseButton.addEventListener("click", event => {
-  if (isPaused()) {
-    play();
-  } else {
-    pause();
-  }
-});
-
-// canvas.addEventListener("click", event => {
-//   const boundingRect = canvas.getBoundingClientRect();
-
-//   const scaleX = canvas.width / boundingRect.width;
-//   const scaleY = canvas.height / boundingRect.height;
-
-//   const canvasLeft = (event.clientX - boundingRect.left) * scaleX;
-//   const canvasTop = (event.clientY - boundingRect.top) * scaleY;
-
-//   const row = Math.min(Math.floor(canvasTop / (CELL_SIZE + 1)), height - 1);
-//   const col = Math.min(Math.floor(canvasLeft / (CELL_SIZE + 1)), width - 1);
-
-//   universe.toggle_cell(row, col);
-
-//   drawGrid();
-//   drawCells();
-// });
-
 
 const drawGrid = () => {
     ctx.beginPath();
@@ -128,5 +136,4 @@ const drawGrid = () => {
 
 drawGrid();
 drawCells();
-//requestAnimationFrame(renderLoop);
 play();
